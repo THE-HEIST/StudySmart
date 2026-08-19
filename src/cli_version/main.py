@@ -1,13 +1,39 @@
-# This is the main program of the project. In here, we will import and combine every function for the complete game 
-# To see how to make the function for the game, check outs in "./example/demo.py"
+from src.data_processing_module.config import Users, Assignments
+from src.core.authentication.controllers import LogIn, LogOut, SignUp
+from src.core.authentication.session import load_session
 
-# This program will be the example one how we will combine the code together
-from .example import demo
-import time
+WELLCOME_TEXT = """
+********************
 
-start = time.now()
-demo.demo_question_print_function()
-demo.demo_question_answer_function()
-stop = time.now()
+WELLCOME TO STUDYSMART
 
-spend = stop - start
+********************
+"""
+
+print(WELLCOME_TEXT)
+
+check_login = load_session()
+if check_login == None:
+    print("No current user detected")
+    print("""
+   ********************
+   1. Login to use Studysmart
+   2. Signup to use Studysmart 
+""")
+    mode = int(input("Choose your steps (1 or 2): "))
+    if mode == 1:
+        LogIn()
+    else:
+        SignUp()
+else:
+    print(f"Hello! {check_login}")
+    print("""
+       ********************
+       1. Continue to using Studysmart
+       2. Log out
+    """)
+    mode = int(input("Choose your steps (1 or 2): "))
+    if mode == 1:
+        LogIn()
+    else:
+        LogOut()
