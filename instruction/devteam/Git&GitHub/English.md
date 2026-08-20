@@ -1,4 +1,4 @@
-# Git & GitHub guide for StudySmart team
+ Git & GitHub guide for StudySmart team
 
 Goal: after reading this, you can work on your own branch, push/pull to the right place, and open a pull request to merge your work. No prior Git knowledge assumed.
 
