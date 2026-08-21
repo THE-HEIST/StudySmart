@@ -92,15 +92,6 @@ class LangaDB:
         return False
 
     def paginate(self, data_list, page=1, page_size=10):
-        """
-        PHÂN TRANG KIỂU OFFSET:
-        - page: Số trang hiện tại (bắt đầu từ 1)
-        - page_size: Số lượng bản ghi trên 1 trang
-        
-        Trả về Dictionary gồm:
-        - items: Danh sách phần tử của trang hiện tại
-        - pagination: Thông tin chi tiết về trang (total, total_pages, has_next, ...)
-        """
         if not isinstance(data_list, list):
             data_list = []
 
@@ -129,11 +120,6 @@ class LangaDB:
         }
 
     def filter(self, list_key, conditions, match_type="AND", page=None, page_size=10):
-        """
-        LỌC VÀ PHÂN TRANG:
-        - conditions: Tuple 1 điều kiện ("field", "op", val) HOẶC List nhiều điều kiện [("f1", "op1", v1), ...]
-        - page: Nếu truyền page (int), hàm sẽ tự động trả về kết quả đã phân trang.
-        """
         if isinstance(conditions, tuple):
             conditions = [conditions]
 
