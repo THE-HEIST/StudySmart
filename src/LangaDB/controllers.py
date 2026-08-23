@@ -66,7 +66,7 @@ class LangaDB:
 
     def add(self, list_key, new_item, auto_id=True):
         if auto_id and isinstance(new_item, dict) and "id" not in new_item:
-            new_item["id"] = self.next_id()
+            new_item["id"] = self.auto_increment_id()
         target = self.query(list_key)
         if isinstance(target, list):
             target.append(new_item)
