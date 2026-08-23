@@ -1,4 +1,4 @@
-# Hướng dẫn sử dụng LangaDB
+Hướng dẫn sử dụng LangaDB
 
 LangaDB là lớp database mini của dự án The-Black-Opal. Nó lưu dữ liệu vào file JSON, đọc lên khi mở app, và ghi lại mỗi khi thêm/sửa. Không cần cài gì thêm — chỉ dùng `json` và `os` có sẵn trong Python.
 
