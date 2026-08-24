@@ -6,9 +6,9 @@
             "owner_id": 1,
             "deadline": "11-09-2026",
             "difficulty": 4,
-            "importance": 5,
             "completed": false,
-            "score": 30
+            "score": 30,
+            "label": "High"
         }
     ]
 }

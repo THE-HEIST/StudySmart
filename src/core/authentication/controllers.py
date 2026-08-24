@@ -21,7 +21,7 @@ def LogIn():
     username = input("What is your name: ")
     password = input("Password: ")
 
-    user = Users.find("users", {"username":username})
+    user = Users.find("users", "username", username)
     password = hashlib.sha256(password.encode()).digest()
     if user and user["password"]:
         if load_session() == None:
