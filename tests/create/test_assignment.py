@@ -37,6 +37,7 @@ assignment = [{
 """
 
 def test_add_assignment(monkeypatch):
+    Assigments.clear_all("assignments")
     # Simulate user input for assignment details
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -47,13 +48,14 @@ def test_add_assignment(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment([])
+    result = add_assignment(Assigments=Assigments)
 
     # Check if the function returns the expected status code
     assert result == 200
     assert Assignments.find("assignments", {"assignment_name": "Test Assignment101"}) is not None
 
 def test_add_assignment_invalid_difficulty(monkeypatch):
+    Assigments.clear_all("assignments")
     # Simulate user input for assignment details with invalid difficulty level
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -66,13 +68,14 @@ def test_add_assignment_invalid_difficulty(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment([])
+    result = add_assignment(Assigments=Assigments)
 
     # Check if the function returns the expected status code
     assert result == 200
     assert Assignments.find("assignments", {"assignment_name": "Test Assignment102"}) is not None
 
 def test_add_assignment_empty_fields(monkeypatch):
+    Assigments.clear_all("assignments")
     # Simulate user input for assignment details with empty fields
     inputs = iter([
         "",                 # Empty assignment name
@@ -87,12 +90,14 @@ def test_add_assignment_empty_fields(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment([])
+    result = add_assignment(Assigments=Assigments)
 
     # Check if the function returns the expected status code
     assert result == 200
     assert Assignments.find("assignments", {"assignment_name": "Test Assignment103"}) is not None
+
 def test_add_assignment_invalid_deadline(monkeypatch):
+    Assigments.clear_all("assignments")
     # Simulate user input for assignment details with invalid deadline format
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -104,13 +109,14 @@ def test_add_assignment_invalid_deadline(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment([])
+    result = add_assignment(Assignments=Assignments)
 
     # Check if the function returns the expected status code
     assert result == 200
     assert Assignments.find("assignments", {"assignment_name": "Test Assignment104"}) is not None
     
 def test_add_assignment_invalid_deadline_format(monkeypatch):
+    Assigments.clear_all("assignments")
     # Simulate user input for assignment details with invalid deadline format
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -122,13 +128,14 @@ def test_add_assignment_invalid_deadline_format(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment([])
+    result = add_assignment(Assignments=Assignments)
 
     # Check if the function returns the expected status code
     assert result == 200
     assert Assignments.find("assignments", {"assignment_name": "Test Assignment105"}) is not None
 
 def test_add_assignment_invalid_deadline_format2(monkeypatch):
+    Assigments.clear_all("assignments")
     # Simulate user input for assignment details with invalid deadline format
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -140,7 +147,7 @@ def test_add_assignment_invalid_deadline_format2(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment([])
+    result = add_assignment(Assignments=Assignments)
 
     # Check if the function returns the expected status code
     assert result == 200

@@ -96,7 +96,7 @@ def test_view_assignments_done(capsys):
     for i in assignments:
         Assignments.add("assignments", i)
     
-    x1 = view_assignments(view_order_by_undone())
+    x1 = view_assignments(Assigments=Assigments, assignments=view_order_by_undone(Assigments=Assigments))
 
     captured = capsys.readouterr()
     assert test_table[1] in captured.out
@@ -134,7 +134,7 @@ def test_view_assignments_all(capsys):
     for i in assignments:
         Assignments.add("assignments", i)
     
-    x1 = view_assignments(view_order_by_undone())
+    x1 = view_assignments(Assignments=Assignments, assignments=view_order_by_undone(Assignments=Assignments))
 
     captured = capsys.readouterr()
     assert test_table[2] in captured.out

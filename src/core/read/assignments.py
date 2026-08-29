@@ -1,19 +1,19 @@
 from src.data_processing_module.config import Assignments
 from src.core.authentication.session import load_session
 
-def view_order_by_undone(sort_key="score", reverse=True, session=load_session()):
+def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True, session=load_session()):
     db = Assignments.find("assignments", "user_id", session["user_id"])
     db = db.find("assignments", "completed", False)
     sorted_assignments = db.sort_by(sort_key=sort_key, reverse=reverse)
     return sorted_assignments
 
-def view_order_by_done(sort_key="score", reverse=True, session=load_session()):
+def view_order_by_done(Assignments=Assigment, sort_key="score", reverse=True, session=load_session()):
     db = Assignments.find("assignments", "user_id", session["user_id"])
     db = db.find("assignments", "completed", True)
     sorted_assignments = db.sort_by(sort_key=sort_key, reverse=reverse)
     return sorted_assignments
 
-def view_order_all(sort_key="score", reverse=True, session=load_session()):
+def view_order_all(Assigments=Assigments,sort_key="score", reverse=True, session=load_session()):
     db = Assignments.find("assignments", "user_id", session["user_id"])
     db = db.find("assignments", "completed", False) + db.find("assignments", "completed", True)
     sorted_assignments = db.sort_by(sort_key=sort_key, reverse=reverse)
@@ -22,7 +22,10 @@ def view_order_all(sort_key="score", reverse=True, session=load_session()):
 # ==========================================
 # FUNCTION 2: VIEW ASSIGNMENT
 # ==========================================
-def view_assignments(assignments):
+def view_assignments(Assignments=Assignments, assignments=None):
+    if assignments is None:
+        assignments = Assignments.all("assignments")
+    
     if len(assignments) == 0:
         print("No assignments found")
     else:

@@ -3,7 +3,7 @@ import hashlib
 from .session import load_session, save_session, clear_session
 
 
-def SignUp():
+def SignUp(Users=Users, test=None):
     username = input("What is your name: ")
     password = input("Password: ")
 
@@ -11,28 +11,28 @@ def SignUp():
 
     Users.add("users", {"username":username,"password":password})
 
-    if load_session() == None:
-        save_session(username)
+    if load_session(test=test) == None:
+        save_session(username, test=test)
         return True
     else:
         return False
 
-def LogIn():
+def LogIn(Users=Users, test=None):
     username = input("What is your name: ")
     password = input("Password: ")
 
     user = Users.find("users", "username", username)
     password = hashlib.sha256(password.encode()).digest()
     if user and user["password"]:
-        if load_session() == None:
-            save_session(username)
+        if load_session(test=test) == None:
+            save_session(username, test=test)
             return True
         else:
             return False
 
-def LogOut():
-    if load_session != None:
-        clear_session()
+def LogOut(Users=Users, test=None):
+    if load_session(test=test) != None:
+        clear_session(test=test)
         return True
     else: 
         return False

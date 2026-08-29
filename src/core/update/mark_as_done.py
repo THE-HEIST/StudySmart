@@ -1,7 +1,7 @@
 from src.data_processing_module.config import Assignments
 from src.core.read.assignments import view_assignments
 
-def mark_completed(assignments):
+def mark_completed(Assigments=Assignments, assignments=None):
     if len(assignments) == 0:
         print("No assignments to update.")
         return
@@ -35,7 +35,7 @@ def mark_completed(assignments):
        error_message = "Invalid selection. Please choose a valid assignment number."
        print(error_message)
 
-def undo_mark_as_done(assignments):
+def undo_mark_as_done(Assigments=Assignments, assignments=None):
     if len(assignments) == 0:
         print("No assignments to update.")
         return

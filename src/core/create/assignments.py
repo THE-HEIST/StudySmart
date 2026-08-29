@@ -5,7 +5,7 @@ from datetime import datetime
 # ==========================================
 # FUNCTION 1: ADD ASSIGNMENT
 # ==========================================
-def add_assignment():
+def add_assignment(Assigment=Assigments):
     # Prompt user to input information and loop to ensure them are not empty
     assignment_name = input("Assignment name:")
     while assignment_name == "":

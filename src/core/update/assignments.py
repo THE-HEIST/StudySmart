@@ -1,7 +1,7 @@
 from src.data_processing_module.config import Assignments
 from src.core.read.assignments import view_assignments
 
-def update_assignment(assignments):
+def update_assignment(assignments, Assignments = Assignments):
     if len(assignments) == 0:
         print("No assignments to update.")
         return
