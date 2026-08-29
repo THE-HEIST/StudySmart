@@ -47,7 +47,8 @@ def main():
                 5. Undo Mark Assignment as Done
                 6. Show Study Summary
                 7. Clear Terminal
-                0. Logout
+                0. Exit w/o Logout
+                -1. Logout
             """)
             choice = int(input("Enter your choice: "))
             if choice == 1:
@@ -65,7 +66,10 @@ def main():
             elif choice == 7:
                 clear_terminal()
             elif choice == 0:
+                break
+            elif choice == -1:
                 LogOut()
+                print("Logged out successfully.")
                 break
             else:
                 print("Invalid choice. Please try again.")
