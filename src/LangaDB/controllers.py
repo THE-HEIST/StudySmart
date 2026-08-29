@@ -82,7 +82,7 @@ class LangaDB:
         result = sorted(items,key=lambda item: item.get(sort_key, 0), reverse=reverse)
         return result[:limit] if limit is not None else result
 
-    def update_where(self, list_key, field_name, value, updates):
+    def update(self, list_key, field_name, value, updates):
         item = self.find(list_key, field_name, value)
         if item:
             item.update(updates)

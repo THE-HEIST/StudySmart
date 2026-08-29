@@ -1,6 +1,7 @@
 from src.data_processing_module.config import Users, Assignments
 from src.core.authentication.controllers import LogIn, LogOut, SignUp
 from src.core.authentication.session import load_session
+from src.core.common.product import main
 
 WELLCOME_TEXT = """
 ********************
@@ -34,6 +35,6 @@ else:
     """)
     mode = int(input("Choose your steps (1 or 2): "))
     if mode == 1:
-        LogIn()
+        main()
     else:
         LogOut()

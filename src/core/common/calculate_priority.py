@@ -34,3 +34,11 @@ def view_priority_ranking(assignments):
         print (assignment_number, assignment_name, priority_score, priority_level)
     return ranked_assignments
 """
+
+def re_calculate_priority(assignments):
+    for assignment in assignments:
+        priority_score = calculate_priority_score(assignment)
+        priority_level = get_priority_level(priority_score)
+        assignment["priority_score"] = priority_score
+        assignment["priority_level"] = priority_level
+    return assignments
