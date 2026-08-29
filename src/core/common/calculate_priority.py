@@ -5,7 +5,7 @@ def calculate_priority_score(assignment):
     #date = datetime.strptime(assignment["deadline"], "%Y-%m-%d")
     date_now = datetime.now().date()
     days_remaining = int((datetime.strptime(assignment['deadline'], "%Y-%m-%d").date() - date_now).days)
-    if days_remaining < 0:
+    if days_remaining <= 0:
         priority_score = 99999
     else:
         priority_score = difficulty / (days_remaining + 1)
