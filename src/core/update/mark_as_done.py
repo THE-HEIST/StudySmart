@@ -1,7 +1,7 @@
 from src.data_processing_module.config import Assignments
 from src.core.read.assignments import view_assignments
 
-def mark_completed(Assigments=Assignments, assignments=None):
+def mark_completed(Assignments=Assignments, assignments=None):
     if len(assignments) == 0:
         print("No assignments to update.")
         return
@@ -28,14 +28,14 @@ def mark_completed(Assigments=Assignments, assignments=None):
     #selected_index = selected_number - 1
     ass = Assignments.find("assignments", "id", selected_number)
 
-    if (selected_index >= 0 and selected_index < len(assignments) and ass is not None and ass['completed'] == False):
+    if (selected_number >= 0 and ass is not None and ass['completed'] == False):
         Assignments.update("assignments", "id", selected_number, {"completed": True})
         print("Assignment marked as completed.")
     else:
        error_message = "Invalid selection. Please choose a valid assignment number."
        print(error_message)
 
-def undo_mark_as_done(Assigments=Assignments, assignments=None):
+def undo_mark_as_done(Assignments=Assignments, assignments=None):
     if len(assignments) == 0:
         print("No assignments to update.")
         return
@@ -52,9 +52,9 @@ def undo_mark_as_done(Assigments=Assignments, assignments=None):
     #selected_index = selected_number - 1
     ass = Assignments.find("assignments", "id", selected_number)
 
-    if (selected_index >= 0 and selected_index < len(assignments) and ass is not None and ass['completed'] == True):
+    if (selected_number >= 0  and ass is not None and ass['completed'] == True):
         #ass = Assignments.find("assignments", "id", selected_number)
-        Assignments.update("assignments", "id", selected_number, {"completed": True})
+        Assignments.update("assignments", "id", selected_number, {"completed": False})
         print("Assignment marked as not completed.")
     else:
        error_message = "Invalid selection. Please choose a valid assignment number."

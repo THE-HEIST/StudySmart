@@ -1,10 +1,10 @@
 {
-    "last_id": 1,
     "users": [
         {
-            "id":1,
-            "username":"Hunganh",
-            "password":"demo"
+            "username": "testuser",
+            "password": "testpassword",
+            "id": 1
         }
-    ]
+    ],
+    "last_id": 1
 }

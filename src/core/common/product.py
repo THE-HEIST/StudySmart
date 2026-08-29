@@ -2,17 +2,17 @@ from src.data_processing_module.config import Users, Assignments
 from src.core.authentication.controllers import LogIn, LogOut, SignUp
 from src.core.authentication.session import load_session
 from src.core.common.calculate_priority import re_calculate_priority
-from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done, view_order_all
+from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done, view_order_all, show_study_summary
 from src.core.create.assignments import add_assignment
 from src.core.update.assignments import update_assignment
 from src.core.update.mark_as_done import mark_completed, undo_mark_as_done
 
-def check_priority_new_day():
+def check_priority_new_day(Assignments=Assignments):
     ass = re_calculate_priority(Assignments.all("assignments"))
     Assignments.clear_all("assignments")
     Assignments.save(ass)
 
-def view_func():
+def view_func(session=load_session(), Assignments=Assignments):
     print("""
         1. View Undone Assignments
         2. View Done Assignments
@@ -20,21 +20,21 @@ def view_func():
     """)
     sub_choice = int(input("Enter your choice: "))
     if sub_choice == 1:
-        assignments = view_order_by_undone(session=session)
-        view_assignments(assignments)
+        assignments = view_order_by_undone(session=session, Assignments=Assignments)
+        view_assignments(assignments, Assignments=Assignments)
     elif sub_choice == 2:
-        assignments = view_order_by_done(session=session)
-        view_assignments(assignments)
+        assignments = view_order_by_done(session=session, Assignments=Assignments)
+        view_assignments(assignments, Assignments=Assignments)
     elif sub_choice == 3:
-        assignments = view_order_all(session=session)
-        view_assignments(assignments)
+        assignments = view_order_all(session=session, Assignments=Assignments)
+        view_assignments(assignments, Assignments=Assignments)
 
 def clear_terminal():
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def main():
-    check_priority_new_day()
+def main(Assignments=Assignments):
+    check_priority_new_day(Assignments=Assignments)
     session = load_session()
     if session:
         print(f"Welcome back, {session['username']}!")
@@ -50,27 +50,30 @@ def main():
                 0. Exit w/o Logout
                 -1. Logout
             """)
-            choice = int(input("Enter your choice: "))
-            if choice == 1:
-                view_func()
-            elif choice == 2:
-                add_assignment()
-            elif choice == 3:
-                update_assignment()
-            elif choice == 4:
-                mark_completed(view_order_by_undone(session=session))
-            elif choice == 5:
-                undo_mark_as_done(view_order_by_done(session=session))
-            elif choice == 6:
-                show_study_summary(view_order_all(session=session))
-            elif choice == 7:
-                clear_terminal()
-            elif choice == 0:
-                break
-            elif choice == -1:
-                LogOut()
-                print("Logged out successfully.")
-                break
-            else:
-                print("Invalid choice. Please try again.")
+            try:
+                choice = int(input("Enter your choice: "))
+                if choice == 1:
+                    view_func(session=session, Assignments=Assignments)
+                elif choice == 2:
+                    add_assignment(Assignments=Assignments, test="test/session.txt")
+                elif choice == 3:
+                    update_assignment(view_order_all(session=session, Assignments=Assignments))
+                elif choice == 4:
+                    mark_completed(view_order_by_undone(session=session, Assignments=Assignments))
+                elif choice == 5:
+                    undo_mark_as_done(view_order_by_done(session=session, Assignments=Assignments))
+                elif choice == 6:
+                    show_study_summary(view_order_all(session=session, Assignments=Assignments))
+                elif choice == 7:
+                    clear_terminal()
+                elif choice == 0:
+                    break
+                elif choice == -1:
+                    LogOut()
+                    print("Logged out successfully.")
+                    break
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
         

@@ -1,7 +1,7 @@
 from src.data_processing_module.config import Assignments
 from src.core.read.assignments import view_assignments
 
-def update_assignment(assignments, Assignments = Assignments):
+def update_assignment(assignments=None, Assignments = Assignments):
     if len(assignments) == 0:
         print("No assignments to update.")
         return
@@ -29,7 +29,7 @@ def update_assignment(assignments, Assignments = Assignments):
 
         if new_name:
             #assignment_to_update["assignment_name"] = new_name
-            Assigment.update("assignments", "id", assignment_to_update["id"], {"assignment_name": new_name})
+            Assignments.update("assignments", "id", assignment_to_update["id"], {"assignment_name": new_name})
         if new_module:
             #assignment_to_update["module_name"] = new_module
             Assignments.update("assignments", "id", assignment_to_update["id"], {"module_name": new_module})

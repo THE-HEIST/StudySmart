@@ -50,7 +50,7 @@ class LangaDB:
         return current
 
     def find(self, list_key, field_name,value):
-        items = self.query(list_key, [])
+        items = self.data if isinstance(self.data, list) else self.query(list_key, [])
         if isinstance(items, list):
             for item in items:
                 if isinstance(item,dict) and item.get(field_name) == value:
@@ -90,11 +90,13 @@ class LangaDB:
         return False
 
     def clear_all(self, list_key):
+
         if isinstance(self.data, dict) and list_key in self.data:
             self.data[list_key] = []
+            self.data['last_id'] = 0
         elif isinstance(self.data, list):
             self.data.clear()
         else:
             return False
-        self.data['last_id'] = 0
+        #self.data['last_id'] = 0
         return self.save(self.data)

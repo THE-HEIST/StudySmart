@@ -1,15 +1,20 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def calculate_priority_score(assignment):
-    difficulty = assignment["difficulty"]
-    date = datetime.strptime(assignment["deadline"], "%Y-%m-%d")
-    date_now = datetime.date.today().strftime("%Y-%m-%d")
-    days_remaining = (date - datetime.strptime(date_now, "%Y-%m-%d").date()).days
-    priority_score = difficulty / (days_remaining + 1)
+    difficulty = int(assignment["difficulty"])
+    #date = datetime.strptime(assignment["deadline"], "%Y-%m-%d")
+    date_now = datetime.now().date()
+    days_remaining = int((datetime.strptime(assignment['deadline'], "%Y-%m-%d").date() - date_now).days)
+    if days_remaining < 0:
+        priority_score = 99999
+    else:
+        priority_score = difficulty / (days_remaining + 1)
     return priority_score
 
 def get_priority_level(priority_score):
-    if priority_score >= 2:
+    if priority_score == 99999:
+        priority_level = "OVERDUE"
+    elif priority_score >= 2:
         priority_level = "HIGH"
     elif priority_score < 1:
         priority_level = "LOW"

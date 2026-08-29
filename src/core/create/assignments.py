@@ -1,11 +1,12 @@
-from data_processing_module.config import Assignments, Users
+from src.data_processing_module.config import Assignments, Users
 from src.core.common.calculate_priority import *
-from datetime import datetime
+from src.core.authentication.session import load_session
+from datetime import datetime, timedelta
 
 # ==========================================
 # FUNCTION 1: ADD ASSIGNMENT
 # ==========================================
-def add_assignment(Assigment=Assigments):
+def add_assignment(Assignments=Assignments, test=None):
     # Prompt user to input information and loop to ensure them are not empty
     assignment_name = input("Assignment name:")
     while assignment_name == "":
@@ -17,15 +18,21 @@ def add_assignment(Assigment=Assigments):
            print("Module cannot be empty!")
            module_name = input("Module:")
 
-    deadline = input("Deadline (Ex: yyyy-mm-dd):").split("-")
+    deadline = input("Deadline (Ex: yyyy-mm-dd):")
     while deadline == "":
            print("Deadline cannot be empty!")
            deadline = input("Deadline (Ex: yyyy-mm-dd): ")
 
-    difficulty = int(input("Difficulty level (1 to 5):"))
-    while difficulty =="":
-           print("Difficulty level cannot be empty!")
-           difficulty = int(input("Difficulty level (1 to 5):"))
+    while True:
+        try:
+            difficulty = int(input("Difficulty level (1 to 5):"))
+            while difficulty =="":
+                print("Difficulty level cannot be empty!")
+                difficulty = int(input("Difficulty level (1 to 5):"))
+            break
+        except ValueError:
+            print("Invalid input! Please enter a valid integer for difficulty level.")
+            return 400
 
        # Validate that days remaining is within the valid range ( >0 )
     """
@@ -35,18 +42,26 @@ def add_assignment(Assigment=Assigments):
                print("---------------------")
                days_remaining = int(input("Days remaining:"))
     """
-    days_remaining = datetime.date(int(deadline[0]), int(deadline[1]), int(deadline[2])) - datetime.date.today()
-    days_remaining = days_remaining.days
+    while True:
+        try:
+            days_remaining = datetime.strptime(deadline, "%Y-%m-%d").date() - datetime.now().date()
+            days_remaining = days_remaining.days
+            break
+        except ValueError:
+            deadline = input("Invalid date format! Please enter the deadline in the format yyyy-mm-dd:")
+            return 400
 
     # Validate that difficulty level is within the valid range (1 to 5)
-    while difficulty < 1 or difficulty > 5:
-        print("---------------------")
-        print("Please enter level from 1 to 5 !")
-        print("---------------------")
-        difficulty = int(input("Difficulty level:"))
+    while True:
+        while difficulty < 1 or difficulty > 5:
+            print("---------------------")
+            print("Please enter level from 1 to 5 !")
+            print("---------------------")
+            difficulty = int(input("Difficulty level:"))
+        break
 
-    deadline = datetime.date(int(deadline[0]), int(deadline[1]), int(deadline[2]))
-    #today = datetime.date.today()
+    deadline = datetime.strptime(deadline, "%Y-%m-%d").date()
+    #today = datetime.now().date()
 
     # Generate unique assignment number based on current list length
     #assignment_number = len(assignments) + 1
@@ -56,7 +71,8 @@ def add_assignment(Assigment=Assigments):
         "module_name": module_name,
         "deadline": deadline.strftime("%Y-%m-%d"),
         "difficulty": difficulty,
-        "completed": False
+        "completed": False,
+        "user_id": load_session(test=test).get("id") if load_session(test=test) else None  # Get the current user ID from the Users class
     }
     assignment["score"] = calculate_priority_score(assignment)
     assignment["level"] = get_priority_level(assignment["score"])

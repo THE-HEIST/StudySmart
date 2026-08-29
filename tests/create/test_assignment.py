@@ -1,6 +1,6 @@
 import pytest
 from src.core.create.assignments import add_assignment
-from datetime import datetime
+from datetime import datetime, timedelta
 from src.data_processing_module.config4test import test_assignments_db as Assignments
 
 Assignments.clear_all("assignments")
@@ -10,7 +10,7 @@ assignment = [{
     "id": 1,
     "assignment_name": "assignment_name",
     "module_name": "module_name",
-    "deadline": datetime.date.today().strftime("%Y-%m-%d") + datetime.timedelta(days=1).strftime("%Y-%m-%d"),
+    "deadline": datetime.now().date().strftime("%Y-%m-%d") + timedelta(days=1).strftime("%Y-%m-%d"),
     "difficulty": 4,
     "score": 0,
     "user_id": 1,
@@ -19,7 +19,7 @@ assignment = [{
     "id": 2,
     "assignment_name": "assignment_name",
     "module_name": "module_name",
-    "deadline": datetime.date.today().strftime("%Y-%m-%d") + datetime.timedelta(days=1).strftime("%Y-%m-%d"),
+    "deadline": datetime.now().date().strftime("%Y-%m-%d") + timedelta(days=1).strftime("%Y-%m-%d"),
     "difficulty": 2,
     "score": 0,
     "user_id": 1,
@@ -28,7 +28,7 @@ assignment = [{
     "id": 3,
     "assignment_name": "assignment_name",
     "module_name": "module_name",
-    "deadline": datetime.date.today().strftime("%Y-%m-%d") + datetime.timedelta(days=2).strftime("%Y-%m-%d"),
+    "deadline": datetime.now().date().strftime("%Y-%m-%d") + timedelta(days=2).strftime("%Y-%m-%d"),
     "difficulty": 1,
     "score": 0,
     "user_id": 1,
@@ -37,7 +37,7 @@ assignment = [{
 """
 
 def test_add_assignment(monkeypatch):
-    Assigments.clear_all("assignments")
+    Assignments.clear_all("assignments")
     # Simulate user input for assignment details
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -48,14 +48,14 @@ def test_add_assignment(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assigments=Assigments)
+    result = add_assignment(Assignments=Assignments, test='/test/session.txt')
 
     # Check if the function returns the expected status code
     assert result == 200
-    assert Assignments.find("assignments", {"assignment_name": "Test Assignment101"}) is not None
+    assert Assignments.find("assignments", "assignment_name", "Test Assignment") is not None
 
 def test_add_assignment_invalid_difficulty(monkeypatch):
-    Assigments.clear_all("assignments")
+    Assignments.clear_all("assignments")
     # Simulate user input for assignment details with invalid difficulty level
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -68,14 +68,14 @@ def test_add_assignment_invalid_difficulty(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assigments=Assigments)
+    result = add_assignment(Assignments=Assignments, test='/test/session.txt')
 
     # Check if the function returns the expected status code
     assert result == 200
-    assert Assignments.find("assignments", {"assignment_name": "Test Assignment102"}) is not None
+    assert Assignments.find("assignments", "assignment_name", "Test Assignment") is not None
 
 def test_add_assignment_empty_fields(monkeypatch):
-    Assigments.clear_all("assignments")
+    Assignments.clear_all("assignments")
     # Simulate user input for assignment details with empty fields
     inputs = iter([
         "",                 # Empty assignment name
@@ -90,14 +90,14 @@ def test_add_assignment_empty_fields(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assigments=Assigments)
+    result = add_assignment(Assignments=Assignments, test="test/session.txt")
 
     # Check if the function returns the expected status code
-    assert result == 200
-    assert Assignments.find("assignments", {"assignment_name": "Test Assignment103"}) is not None
+    assert result == 400
+    #assert Assignments.find("assignments", "assignment_name", "Test Assignment") is not None
 
 def test_add_assignment_invalid_deadline(monkeypatch):
-    Assigments.clear_all("assignments")
+    Assignments.clear_all("assignments")
     # Simulate user input for assignment details with invalid deadline format
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -109,14 +109,14 @@ def test_add_assignment_invalid_deadline(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments)
+    result = add_assignment(Assignments=Assignments, test="test/session.txt")
 
     # Check if the function returns the expected status code
-    assert result == 200
-    assert Assignments.find("assignments", {"assignment_name": "Test Assignment104"}) is not None
-    
+    assert result == 400
+    #assert Assignments.find("assignments", "assignment_name", "Test Assignment104") is not None
+
 def test_add_assignment_invalid_deadline_format(monkeypatch):
-    Assigments.clear_all("assignments")
+    Assignments.clear_all("assignments")
     # Simulate user input for assignment details with invalid deadline format
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -128,14 +128,14 @@ def test_add_assignment_invalid_deadline_format(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments)
+    result = add_assignment(Assignments=Assignments,test="test/session.txt")
 
     # Check if the function returns the expected status code
-    assert result == 200
-    assert Assignments.find("assignments", {"assignment_name": "Test Assignment105"}) is not None
+    assert result == 400
+    #assert Assignments.find("assignments", "assignment_name", "Test Assignment105") is not None
 
 def test_add_assignment_invalid_deadline_format2(monkeypatch):
-    Assigments.clear_all("assignments")
+    Assignments.clear_all("assignments")
     # Simulate user input for assignment details with invalid deadline format
     inputs = iter([
         "Test Assignment",  # Assignment name
@@ -147,8 +147,8 @@ def test_add_assignment_invalid_deadline_format2(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments)
+    result = add_assignment(Assignments=Assignments, test="test/session.txt")
 
     # Check if the function returns the expected status code
-    assert result == 200
-    assert Assignments.find("assignments", {"assignment_name": "Test Assignment106"}) is not None
+    assert result == 400
+    #assert Assignments.find("assignments", "assignment_name", "Test Assignment106") is not None

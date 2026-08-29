@@ -1,30 +1,59 @@
 from src.data_processing_module.config import Assignments
 from src.core.authentication.session import load_session
 
-def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True, session=load_session()):
-    db = Assignments.find("assignments", "user_id", session["user_id"])
-    db = db.find("assignments", "completed", False)
-    sorted_assignments = db.sort_by(sort_key=sort_key, reverse=reverse)
-    return sorted_assignments
+def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True, session=None):
+    if session is None:
+        session = load_session()
+    all_assignments = Assignments.query("assignments", []) if hasattr(Assignments, "query") else (Assignments if isinstance(Assignments, list) else [])
+    if not isinstance(all_assignments, list):
+        all_assignments = []
+    user_id = session.get("id") if isinstance(session, dict) else None
+    if user_id is not None:
+        filtered = [a for a in all_assignments if a.get("user_id") == user_id and not a.get("completed")]
+    else:
+        filtered = [a for a in all_assignments if not a.get("completed")]
+    return sorted(filtered, key=lambda x: x.get(sort_key, 0), reverse=reverse)
 
-def view_order_by_done(Assignments=Assigment, sort_key="score", reverse=True, session=load_session()):
-    db = Assignments.find("assignments", "user_id", session["user_id"])
-    db = db.find("assignments", "completed", True)
-    sorted_assignments = db.sort_by(sort_key=sort_key, reverse=reverse)
-    return sorted_assignments
+def view_order_by_done(Assignments=Assignments, sort_key="score", reverse=True, session=None):
+    if session is None:
+        session = load_session()
+    all_assignments = Assignments.query("assignments", []) if hasattr(Assignments, "query") else (Assignments if isinstance(Assignments, list) else [])
+    if not isinstance(all_assignments, list):
+        all_assignments = []
+    user_id = session.get("id") if isinstance(session, dict) else None
+    if user_id is not None:
+        filtered = [a for a in all_assignments if a.get("user_id") == user_id and a.get("completed")]
+    else:
+        filtered = [a for a in all_assignments if a.get("completed")]
+    return sorted(filtered, key=lambda x: x.get(sort_key, 0), reverse=reverse)
 
-def view_order_all(Assigments=Assigments,sort_key="score", reverse=True, session=load_session()):
-    db = Assignments.find("assignments", "user_id", session["user_id"])
-    db = db.find("assignments", "completed", False) + db.find("assignments", "completed", True)
-    sorted_assignments = db.sort_by(sort_key=sort_key, reverse=reverse)
-    return sorted_assignments
+def view_order_all(Assignments=Assignments, sort_key="score", reverse=True, session=None):
+    if session is None:
+        session = load_session()
+    all_assignments = Assignments.query("assignments", []) if hasattr(Assignments, "query") else (Assignments if isinstance(Assignments, list) else [])
+    if not isinstance(all_assignments, list):
+        all_assignments = []
+    user_id = session.get("id") if isinstance(session, dict) else None
+    if user_id is not None:
+        filtered = [a for a in all_assignments if a.get("user_id") == user_id]
+    else:
+        filtered = list(all_assignments)
+    return sorted(filtered, key=lambda x: x.get(sort_key, 0), reverse=reverse)
 
 # ==========================================
 # FUNCTION 2: VIEW ASSIGNMENT
 # ==========================================
 def view_assignments(Assignments=Assignments, assignments=None):
-    if assignments is None:
-        assignments = Assignments.all("assignments")
+    if isinstance(Assignments, list) and assignments is None:
+        assignments = Assignments
+        Assignments = None
+    elif assignments is None:
+        if hasattr(Assignments, "query_all"):
+            assignments = Assignments.query_all("assignments")
+        elif hasattr(Assignments, "query"):
+            assignments = Assignments.query("assignments", [])
+        else:
+            assignments = []
     
     if len(assignments) == 0:
         print("No assignments found")
@@ -50,7 +79,7 @@ def show_study_summary(assignments):
     incomplete_count = 0
 
     for assignment in assignments:
-        if assignment["completed"]:
+        if assignment.get("completed"):
             completed_count = completed_count + 1
         else:
             incomplete_count = incomplete_count + 1

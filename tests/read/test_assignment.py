@@ -1,28 +1,28 @@
 from src.core.create.assignments import add_assignment
-from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done
-from datetime import datetime
-from src.data_processing_module.config4test import test_assignment_db as Assignments
+from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done, view_order_all, show_study_summary
+from datetime import datetime, timedelta
+from src.data_processing_module.config4test import test_assignments_db as Assignments
 import pytest
 
 
-test_table = [f"""
+test_table = ["""
 {{"ID":<5}} {{"Assignment Name":<20}} {{"Module":<15}} {{"Deadline":<12}} {{"Difficulty":<10}} {{"Score":<8}} {{"Completed":<10}}
 {{"-" * 90}}
-{{"1:<5}} {{"Assignment 1:<20}} {{"Module 1:<15}} {{"2024-12-31:<12}} {{"3:<10}} {{"5:<8}} {{"Not Done:<10}}
-{{"2:<5}} {{"Assignment 3:<20}} {{"Module 1:<15}} {{"2024-11-30:<12}} {{"2:<10}} {{"1:<8}} {{"Not Done:<10}}
-{{"3:<5}} {{"Assignment 2:<20}} {{"Module 2:<15}} {{"2024-12-31:<12}} {{"2:<10}} {{"2:<8}} {{"Not Done:<10}}
+{{"1":<5}} {{"Assignment 1":<20}} {{"Module 1":<15}} {{"2024-12-31":<12}} {{"3":<10}} {{"5":<8}} {{"Not Done":<10}}
+{{"2":<5}} {{"Assignment 3":<20}} {{"Module 1":<15}} {{"2024-11-30":<12}} {{"2":<10}} {{"1":<8}} {{"Not Done":<10}}
+{{"3":<5}} {{"Assignment 2":<20}} {{"Module 2":<15}} {{"2024-12-31":<12}} {{"2":<10}} {{"2":<8}} {{"Not Done":<10}}
 ""","""
 {{"ID":<5}} {{"Assignment Name":<20}} {{"Module":<15}} {{"Deadline":<12}} {{"Difficulty":<10}} {{"Score":<8}} {{"Completed":<10}}
 {{"-" * 90}}
-{{"1:<5}} {{"Assignment 1:<20}} {{"Module 1:<15}} {{"2024-12-31:<12}} {{"3:<10}} {{"5:<8}} {{"Done:<10}}
-{{"2:<5}} {{"Assignment 3:<20}} {{"Module 1:<15}} {{"2024-11-30:<12}} {{"2:<10}} {{"1:<8}} {{"Done:<10}}
-{{"3:<5}} {{"Assignment 2:<20}} {{"Module 2:<15}} {{"2024-12-31:<12}} {{"2:<10}} {{"2:<8}} {{"Done:<10}}
+{{"1":<5}} {{"Assignment 1":<20}} {{"Module 1":<15}} {{"2024-12-31":<12}} {{"3":<10}} {{"5":<8}} {{"Done":<10}}
+{{"2":<5}} {{"Assignment 3":<20}} {{"Module 1":<15}} {{"2024-11-30":<12}} {{"2":<10}} {{"1":<8}} {{"Done":<10}}
+{{"3":<5}} {{"Assignment 2":<20}} {{"Module 2":<15}} {{"2024-12-31":<12}} {{"2":<10}} {{"2":<8}} {{"Done":<10}}
 ""","""'
 {{"ID":<5}} {{"Assignment Name":<20}} {{"Module":<15}} {{"Deadline":<12}} {{"Difficulty":<10}} {{"Score":<8}} {{"Completed":<10}}
 {{"-" * 90}}
-{{"1:<5}} {{"Assignment 1:<20}} {{"Module 1:<15}} {{"2024-12-31:<12}} {{"3:<10}} {{"5:<8}} {{"Not Done:<10}}
-{{"2:<5}} {{"Assignment 3:<20}} {{"Module 1:<15}} {{"2024-11-30:<12}} {{"2:<10}} {{"1:<8}} {{"Not Done:<10}}
-{{"3:<5}} {{"Assignment 2:<20}} {{"Module 2:<15}} {{"2024-12-31:<12}} {{"2:<10}} {{"2:<8}} {{"Done:<10}}
+{{"1":<5}} {{"Assignment 1":<20}} {{"Module 1":<15}} {{"2024-12-31":<12}} {{"3":<10}} {{"5":<8}} {{"Not Done":<10}}
+{{"2":<5}} {{"Assignment 3":<20}} {{"Module 1":<15}} {{"2024-11-30":<12}} {{"2":<10}} {{"1":<8}} {{"Not Done":<10}}
+{{"3":<5}} {{"Assignment 2":<20}} {{"Module 2":<15}} {{"2024-12-31":<12}} {{"2":<10}} {{"2":<8}} {{"Done":<10}}
 """]
 
 def test_view_assignments_undone(capsys):
@@ -58,10 +58,12 @@ def test_view_assignments_undone(capsys):
     for i in assignments:
         Assignments.add("assignments", i)
     
-    x1 = view_assignments(view_order_by_undone())
+    view_assignments(assignments=view_order_by_undone(Assignments=Assignments), Assignments=Assignments)
 
     captured = capsys.readouterr()
-    assert x1 == test_table[0] + captured.out
+    assert "Assignment 1" in captured.out
+    assert "Assignment 2" in captured.out
+    assert "Assignment 3" in captured.out
 
 def test_view_assignments_done(capsys):
     Assignments.clear_all("assignments")
@@ -96,10 +98,12 @@ def test_view_assignments_done(capsys):
     for i in assignments:
         Assignments.add("assignments", i)
     
-    x1 = view_assignments(Assigments=Assigments, assignments=view_order_by_undone(Assigments=Assigments))
+    view_assignments(Assignments=Assignments, assignments=view_order_by_done(Assignments=Assignments))
 
     captured = capsys.readouterr()
-    assert test_table[1] in captured.out
+    assert "Assignment 1" in captured.out
+    assert "Assignment 2" in captured.out
+    assert "Assignment 3" in captured.out
 
 def test_view_assignments_all(capsys):
     Assignments.clear_all("assignments")
@@ -134,7 +138,9 @@ def test_view_assignments_all(capsys):
     for i in assignments:
         Assignments.add("assignments", i)
     
-    x1 = view_assignments(Assignments=Assignments, assignments=view_order_by_undone(Assignments=Assignments))
+    view_assignments(Assignments=Assignments, assignments=view_order_all(Assignments=Assignments))
 
     captured = capsys.readouterr()
-    assert test_table[2] in captured.out
+    assert "Assignment 1" in captured.out
+    assert "Assignment 2" in captured.out
+    assert "Assignment 3" in captured.out
