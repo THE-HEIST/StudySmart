@@ -1,8 +1,14 @@
+from src.data_processing_module.config import Assignments
+from src.core.read.assignments import view_assignments
+
 def mark_completed(assignments):
     if len(assignments) == 0:
         print("No assignments to update.")
         return
 
+    view_assignments(assignments)
+
+    """
     for i in range (len(assignments)):
         assignment_number = i + 1
         if assignments[i]["completed"]:
@@ -10,6 +16,7 @@ def mark_completed(assignments):
         else:
             status_text = "Incomplete"
         print(f"{assignment_number}. {assignments[i]['assignment_name']} - {status_text}")
+    """
 
     user_input = input("Enter the assignment number to mark as completed: ")
     if not user_input.isdigit():

@@ -74,12 +74,13 @@ class LangaDB:
             self.data.append(new_item)
         return self.save(self.data)
 
-    def sort_by(self, list_key="assignments", sort_key="score",reverse=True, limit=5):
+
+    def sort_by(self, list_key="assignments", sort_key="score",reverse=True, limit=None):
         items = self.data if isinstance(self.data, list) else self.query(list_key, self.data if isinstance(self.data, list) else [])
         if not isinstance(items, list):
             return []
         result = sorted(items,key=lambda item: item.get(sort_key, 0), reverse=reverse)
-        return result[:limit]
+        return result[:limit] if limit is not None else result
 
     def update_where(self, list_key, field_name, value, updates):
         item = self.find(list_key, field_name, value)
@@ -87,3 +88,13 @@ class LangaDB:
             item.update(updates)
             return self.save(self.data)
         return False
+
+    def clear_all(self, list_key):
+        if isinstance(self.data, dict) and list_key in self.data:
+            self.data[list_key] = []
+        elif isinstance(self.data, list):
+            self.data.clear()
+        else:
+            return False
+        self.data['last_id'] = 0
+        return self.save(self.data)

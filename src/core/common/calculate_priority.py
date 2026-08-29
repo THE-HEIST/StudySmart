@@ -1,11 +1,14 @@
+from datetime import datetime
 
-def calculate_priority_score (assignment):
+def calculate_priority_score(assignment):
     difficulty = assignment["difficulty"]
-    days_remaining = assignment["days_remaining"]
+    date = datetime.strptime(assignment["deadline"], "%Y-%m-%d")
+    date_now = datetime.date.today().strftime("%Y-%m-%d")
+    days_remaining = (date - datetime.strptime(date_now, "%Y-%m-%d").date()).days
     priority_score = difficulty / (days_remaining + 1)
     return priority_score
 
-def get_priority_level (priority_score):
+def get_priority_level(priority_score):
     if priority_score >= 2:
         priority_level = "HIGH"
     elif priority_score < 1:
@@ -14,6 +17,7 @@ def get_priority_level (priority_score):
         priority_level = "MEDIUM"
     return priority_level
 
+"""
 def view_priority_ranking(assignments):
     unfinished_assignments = []
     for assignment in assignments:
@@ -29,3 +33,4 @@ def view_priority_ranking(assignments):
         assignment_name = assignment["assignment_name"]
         print (assignment_number, assignment_name, priority_score, priority_level)
     return ranked_assignments
+"""
