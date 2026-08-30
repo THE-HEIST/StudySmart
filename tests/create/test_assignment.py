@@ -1,6 +1,7 @@
 import pytest
 from src.core.create.assignments import add_assignment
 from datetime import datetime, timedelta
+from src.data_processing_module.config4test import test_users_db as Users
 from src.data_processing_module.config4test import test_assignments_db as Assignments
 
 Assignments.clear_all("assignments")
@@ -48,7 +49,7 @@ def test_add_assignment(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments, test='/test/session.txt')
+    result = add_assignment(Assignments=Assignments, Users=Users, test='/test/session.txt')
 
     # Check if the function returns the expected status code
     assert result == 200
@@ -68,7 +69,7 @@ def test_add_assignment_invalid_difficulty(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments, test='/test/session.txt')
+    result = add_assignment(Assignments=Assignments, Users=Users, test='/test/session.txt')
 
     # Check if the function returns the expected status code
     assert result == 200
@@ -90,7 +91,7 @@ def test_add_assignment_empty_fields(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments, test="test/session.txt")
+    result = add_assignment(Assignments=Assignments, Users=Users, test="test/session.txt")
 
     # Check if the function returns the expected status code
     assert result == 400
@@ -109,7 +110,7 @@ def test_add_assignment_invalid_deadline(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments, test="test/session.txt")
+    result = add_assignment(Assignments=Assignments, Users=Users, test="test/session.txt")
 
     # Check if the function returns the expected status code
     assert result == 400
@@ -128,7 +129,7 @@ def test_add_assignment_invalid_deadline_format(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments,test="test/session.txt")
+    result = add_assignment(Assignments=Assignments, Users=Users, test="test/session.txt")
 
     # Check if the function returns the expected status code
     assert result == 400
@@ -147,7 +148,7 @@ def test_add_assignment_invalid_deadline_format2(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
     # Call the function to add an assignment
-    result = add_assignment(Assignments=Assignments, test="test/session.txt")
+    result = add_assignment(Assignments=Assignments, Users=Users, test="test/session.txt")
 
     # Check if the function returns the expected status code
     assert result == 400

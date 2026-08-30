@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 # ==========================================
 # FUNCTION 1: ADD ASSIGNMENT
 # ==========================================
-def add_assignment(Assignments=Assignments, test=None):
+def add_assignment(Assignments=Assignments, Users=Users, test=None):
     # Prompt user to input information and loop to ensure them are not empty
     assignment_name = input("Assignment name:")
     while assignment_name == "":
@@ -72,7 +72,7 @@ def add_assignment(Assignments=Assignments, test=None):
         "deadline": deadline.strftime("%Y-%m-%d"),
         "difficulty": difficulty,
         "completed": False,
-        "user_id": load_session(test=test).get("id") if load_session(test=test) else None  # Get the current user ID from the Users class
+        "user_id": load_session(Users=Users, test=test).get("id") if load_session(Users=Users, test=test) else None # Get the current user ID from the Users class
     }
     assignment["score"] = calculate_priority_score(assignment)
     assignment["level"] = get_priority_level(assignment["score"])

@@ -28,12 +28,14 @@ def LogIn(Users=Users, test=None):
     user = Users.find("users", "username", username)
     password = str(hashlib.sha256(password.encode()).hexdigest())
     if user and user["password"] and password == user["password"]:
-        if load_session(test=test) == None:
+        if load_session(Users=Users, test=test) == None:
             save_session(username, test=test)
             return True
         else:
             return False
+    else:
+        return False
 
 def LogOut(Users=Users, test=None):
-    clear_session(test=test)
+    clear_session(Users=Users, test=test)
     return True

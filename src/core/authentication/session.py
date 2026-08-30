@@ -11,7 +11,7 @@ def save_session(username: str, test=None):
         SESSION_FILE = SESSION_FILE = BASE_DIR / 'src' / "data" / test
     SESSION_FILE.write_text(username, encoding="utf-8")
 
-def load_session(test=None):
+def load_session(Users=Users, test=None):
     SESSION_FILE = BASE_DIR / 'src' / "data" / "session.txt"
     if test is not None:
         SESSION_FILE = SESSION_FILE = BASE_DIR / 'src' / "data" / test
@@ -23,7 +23,7 @@ def load_session(test=None):
         return None
     return Users.find("users", "username", username)
 
-def clear_session(test=None):
+def clear_session(Users=Users, test=None):
     SESSION_FILE = BASE_DIR / 'src' / "data" / "session.txt"
     if test is not None:
         SESSION_FILE = BASE_DIR / 'src' / "data" / test

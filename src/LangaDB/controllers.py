@@ -27,8 +27,14 @@ class LangaDB:
                 print(f"Error: {e}")
                 return False
 
-    def query_all(self, name):
-        return self.data.get(name)
+    def all(self, name):
+        if isinstance(self.data, dict):
+            return self.data.get(name, [])
+        elif isinstance(self.data, list):
+            return self.data
+        else:
+            return []
+        #return self.data.get(name)
 
     def save(self, new_data):
         try:
@@ -54,6 +60,7 @@ class LangaDB:
         if isinstance(items, list):
             for item in items:
                 if isinstance(item,dict) and item.get(field_name) == value:
+                    #print(f"Found item: {item}")
                     return item
         return None
 
@@ -100,3 +107,11 @@ class LangaDB:
             return False
         #self.data['last_id'] = 0
         return self.save(self.data)
+
+    def get_last_id(self, list_key):
+        if isinstance(self.data, dict) and list_key in self.data:
+            return self.data.get('last_id', 0)
+        elif isinstance(self.data, list):
+            return len(self.data)
+        else:
+            return 0

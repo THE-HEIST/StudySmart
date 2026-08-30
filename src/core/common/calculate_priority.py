@@ -44,6 +44,6 @@ def re_calculate_priority(assignments):
     for assignment in assignments:
         priority_score = calculate_priority_score(assignment)
         priority_level = get_priority_level(priority_score)
-        assignment["priority_score"] = priority_score
-        assignment["priority_level"] = priority_level
+        assignment["score"] = priority_score
+        assignment["level"] = priority_level
     return assignments

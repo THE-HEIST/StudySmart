@@ -37,8 +37,7 @@ def test_update_assignment(monkeypatch):
         "Updated Assignment",  # New assignment name
         "Updated Module",      # New module name
         "2025-01-31",          # New deadline
-        "4",                   # New difficulty
-        "10"                   # New score
+        "4",                   # New difficulty                   # New score
     ])
     original_input = monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     
@@ -51,4 +50,4 @@ def test_update_assignment(monkeypatch):
     assert updated_assignment["module_name"] == "Updated Module"
     assert updated_assignment["deadline"] == "2025-01-31"
     assert updated_assignment["difficulty"] == 4
-    assert updated_assignment["score"] == 10
+    assert updated_assignment["score"] == 5

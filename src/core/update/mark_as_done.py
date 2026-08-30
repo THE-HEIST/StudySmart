@@ -2,60 +2,47 @@ from src.data_processing_module.config import Assignments
 from src.core.read.assignments import view_assignments
 
 def mark_completed(Assignments=Assignments, assignments=None):
-    if len(assignments) == 0:
-        print("No assignments to update.")
+    if assignments is None or len(assignments) == 0:
+        print("\nNo assignments to update.\n")
         return
 
     view_assignments(assignments)
 
-    """
-    for i in range (len(assignments)):
-        assignment_number = i + 1
-        if assignments[i]["completed"]:
-            status_text = "Completed"
-        else:
-            status_text = "Incomplete"
-        print(f"{assignment_number}. {assignments[i]['assignment_name']} - {status_text}")
-    """
-
-    user_input = input("Enter the assignment number to mark as completed: ")
+    user_input = input("\nEnter the assignment number to mark as completed: ")
     if not user_input.isdigit():
-        error_message = "Invalid selection. Please choose a valid assignment number."
+        error_message = "\nInvalid selection. Please choose a valid assignment number.\n"
         print(error_message)
         return
 
     selected_number = int(user_input)
-    #selected_index = selected_number - 1
     ass = Assignments.find("assignments", "id", selected_number)
 
     if (selected_number >= 0 and ass is not None and ass['completed'] == False):
         Assignments.update("assignments", "id", selected_number, {"completed": True})
-        print("Assignment marked as completed.")
+        print("\nAssignment marked as completed.\n")
     else:
-       error_message = "Invalid selection. Please choose a valid assignment number."
+       error_message = "\nInvalid selection. Please choose a valid assignment number.\n"
        print(error_message)
 
 def undo_mark_as_done(Assignments=Assignments, assignments=None):
-    if len(assignments) == 0:
-        print("No assignments to update.")
+    if assignments is None or len(assignments) == 0:
+        print("\nNo assignments to update.\n")
         return
 
     view_assignments(assignments)
 
-    user_input = input("Enter the assignment number to undo mark as completed: ")
+    user_input = input("\nEnter the assignment number to undo mark as completed: ")
     if not user_input.isdigit():
-        error_message = "Invalid selection. Please choose a valid assignment number."
+        error_message = "\nInvalid selection. Please choose a valid assignment number.\n"
         print(error_message)
         return
 
     selected_number = int(user_input)
-    #selected_index = selected_number - 1
     ass = Assignments.find("assignments", "id", selected_number)
 
     if (selected_number >= 0  and ass is not None and ass['completed'] == True):
-        #ass = Assignments.find("assignments", "id", selected_number)
         Assignments.update("assignments", "id", selected_number, {"completed": False})
-        print("Assignment marked as not completed.")
+        print("\nAssignment marked as not completed.\n")
     else:
-       error_message = "Invalid selection. Please choose a valid assignment number."
+       error_message = "\nInvalid selection. Please choose a valid assignment number.\n"
        print(error_message)

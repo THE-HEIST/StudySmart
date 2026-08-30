@@ -31,7 +31,7 @@ def test_login_dont_exist(monkeypatch):
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
     x = LogIn(Users=Users, test="test/session.txt")
 
-    assert x == None
+    assert not x
     assert Users.find("users", "username", "testuser") is None  # User does not exist in the database
 
 def test_login_wrong_password(monkeypatch):
@@ -45,5 +45,5 @@ def test_login_wrong_password(monkeypatch):
     ])
     monkeypatch.setattr("builtins.input", lambda _: next(inputs))
     x = LogIn(Users=Users, test="test/session.txt")
-    assert x == None
+    assert not x
     assert Users.find("users", "username", "testuser") is not None  # User still exists in the database
