@@ -8,6 +8,7 @@
             "difficulty": 1,
             "completed": false,
             "score": 0.002044989775051125,
+            "score": 0.0020408163265306124,
             "level": "LOW",
             "id": 1
         },
@@ -27,7 +28,7 @@
             "deadline": "2026-09-11",
             "difficulty": 3,
             "completed": true,
-            "score": 0.25,
+            "score": 0.23076923076923078,
             "level": "LOW",
             "id": 3
         }

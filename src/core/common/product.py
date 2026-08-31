@@ -60,8 +60,8 @@ def main(Assignments=Assignments):
             (0, "Exit"),
         ]
         while True:
-            #username = session.get('username') if isinstance(session, dict) else session
-            print(f"\nWelcome back!")
+            username = session.get('username') if isinstance(session, dict) else session
+            print(f"\nWelcome back, {username}!")
             print_menu(menu)
             try:
                 choice = int(input("Enter your choice: "))
@@ -81,7 +81,6 @@ def main(Assignments=Assignments):
                 elif choice == 7:
                     clear_terminal()
                 elif choice == 0:
-                    print("Good Bye!")
                     break
                 else:
                     print("\nInvalid choice. Please try again.\n")

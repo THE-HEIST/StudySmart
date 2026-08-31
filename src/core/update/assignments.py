@@ -6,7 +6,6 @@ def update_assignment(assignments=None, Assignments = Assignments):
     if len(assignments) == 0:
         print("\nNo assignments to update.\n")
         return
-
     view_assignments(assignments=assignments)
 
     user_input = input("\nEnter the assignment number to update: ")

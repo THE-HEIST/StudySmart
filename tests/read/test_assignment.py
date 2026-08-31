@@ -98,7 +98,11 @@ def test_view_assignments_done(capsys):
     for i in assignments:
         Assignments.add("assignments", i)
     
+<<<<<<< HEAD
     view_assignments(Assignments=Assignments, assignments=view_order_by_done(Assignments=Assignments, sort_key="score", reverse=True))
+=======
+    view_assignments(Assignments=Assignments, assignments=view_order_by_done(Assignments=Assignments))
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
 
     captured = capsys.readouterr()
     assert "Assignment 1" in captured.out

@@ -21,23 +21,11 @@ def view_order_all(Assignments=Assignments, sort_key="score", reverse=True, sess
     assignments = Assignments.all('assignments')
     return sorted(assignments, key=lambda x: x.get(sort_key,0), reverse=reverse)
 
+
 # ==========================================
 # FUNCTION 2: VIEW ASSIGNMENT
 # ==========================================
-def view_assignments(Assignments=Assignments, assignments=None):
-    """
-    if isinstance(Assignments, list) and assignments is None:
-        assignments = Assignments
-        Assignments = None
-    elif assignments is None:
-        if hasattr(Assignments, "all"):
-            assignments = Assignments.all("assignments")
-        elif hasattr(Assignments, "query"):
-            assignments = Assignments.query("assignments", [])
-        else:
-            assignments = []
-    """
-    
+def view_assignments(Assignments=Assignments, assignments=None):    
     if len(assignments) == 0 or assignments == None:
         print("No assignments found")
     else:
