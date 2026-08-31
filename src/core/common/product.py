@@ -3,7 +3,7 @@ from src.data_processing_module.config import Assignments
 from src.core.common.calculate_priority import re_calculate_priority
 from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done, view_order_all, show_study_summary
 from src.core.create.assignments import add_assignment
-from src.core.update.assignments import update_assignment
+#from src.core.update.assignments import update_assignment
 from src.core.update.mark_as_done import mark_completed, undo_mark_as_done
 
 def check_priority_new_day(Assignments=Assignments):
@@ -50,11 +50,10 @@ def main(Assignments=Assignments):
     menu = [
         (1, "View Assignments"),
         (2, "Add Assignment"),
-        (3, "Update Assignment"),
-        (4, "Mark Assignment as Done"),
-        (5, "Undo Mark Assignment as Done"),
-        (6, "Show Study Summary"),
-        (7, "Clear Terminal"),
+        (3, "Mark Assignment as Done"),
+        (4, "Undo Mark Assignment as Done"),
+        (5, "Show Study Summary"),
+        (6, "Clear Terminal"),
             (0, "Exit"),
         ]
     while True:
@@ -69,14 +68,12 @@ def main(Assignments=Assignments):
             elif choice == 2:
                 add_assignment()
             elif choice == 3:
-                update_assignment(assignments=view_order_all())
-            elif choice == 4:
                 mark_completed(assignments=view_order_by_undone())
-            elif choice == 5:
+            elif choice == 4:
                 undo_mark_as_done(assignments=view_order_by_done())
-            elif choice == 6:
+            elif choice == 5:
                 show_study_summary(assignments=view_order_all())
-            elif choice == 7:
+            elif choice == 6:
                 clear_terminal()
             elif choice == 0:
                     print("Good Bye!")
