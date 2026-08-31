@@ -1,5 +1,4 @@
 from src.data_processing_module.config import Assignments
-from src.core.authentication.session import load_session
 
 def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True, session=None):
     assignments = Assignments.all('assignments')

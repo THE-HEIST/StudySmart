@@ -1,6 +1,5 @@
 from src.data_processing_module.config import Assignments, Users
 from src.core.common.calculate_priority import *
-from src.core.authentication.session import load_session
 from datetime import datetime, timedelta
 
 # ==========================================

@@ -1,6 +1,4 @@
 from src.data_processing_module.config import Users, Assignments
-from src.core.authentication.controllers import LogIn, LogOut, SignUp
-from src.core.authentication.session import load_session
 from src.core.common.product import main
 
 WELLCOME_TEXT = """
