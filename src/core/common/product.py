@@ -1,6 +1,5 @@
-from src.data_processing_module.config import Users, Assignments
-from src.core.authentication.controllers import LogIn, LogOut, SignUp
-from src.core.authentication.session import load_session
+from src.data_processing_module.config import Assignments
+
 from src.core.common.calculate_priority import re_calculate_priority
 from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done, view_order_all, show_study_summary
 from src.core.create.assignments import add_assignment
@@ -22,7 +21,7 @@ def print_menu(items):
         print("{:<5} {:<35}".format(no, name))
     print()
 
-def view_func(session=load_session(), Assignments=Assignments):
+def view_func(session=None, Assignments=Assignments):
     menu = [
         (1, "View Undone Assignments"),
         (2, "View Done Assignments"),
@@ -47,60 +46,43 @@ def clear_terminal():
 
 def main(Assignments=Assignments):
     check_priority_new_day(Assignments=Assignments)
-    session = load_session()
-    if session:
-        menu = [
-            (1, "View Assignments"),
-            (2, "Add Assignment"),
-            (3, "Update Assignment"),
-            (4, "Mark Assignment as Done"),
-            (5, "Undo Mark Assignment as Done"),
-            (6, "Show Study Summary"),
-            (7, "Clear Terminal"),
-<<<<<<< HEAD
+    #session = load_session()
+    menu = [
+        (1, "View Assignments"),
+        (2, "Add Assignment"),
+        (3, "Update Assignment"),
+        (4, "Mark Assignment as Done"),
+        (5, "Undo Mark Assignment as Done"),
+        (6, "Show Study Summary"),
+        (7, "Clear Terminal"),
             (0, "Exit"),
         ]
-        while True:
-            #username = session.get('username') if isinstance(session, dict) else session
-            print(f"\nWelcome back!")
-=======
-            (0, "Exit w/o Logout"),
-            (-1, "Logout")
-        ]
-        while True:
-            username = session.get('username') if isinstance(session, dict) else session
-            print(f"\nWelcome back, {username}!")
->>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
-            print_menu(menu)
-            try:
-                choice = int(input("Enter your choice: "))
-                print()
-                if choice == 1:
-                    view_func(session=session, Assignments=Assignments)
-                elif choice == 2:
-                    add_assignment()
-                elif choice == 3:
-                    update_assignment(assignments=view_order_all())
-                elif choice == 4:
-                    mark_completed(assignments=view_order_by_undone())
-                elif choice == 5:
-                    undo_mark_as_done(assignments=view_order_by_done())
-                elif choice == 6:
-                    show_study_summary(assignments=view_order_all())
-                elif choice == 7:
-                    clear_terminal()
-                elif choice == 0:
-<<<<<<< HEAD
+    while True:
+        #username = session.get('username') if isinstance(session, dict) else session
+        print(f"\nWelcome back!")
+        print_menu(menu)
+        try:
+            choice = int(input("Enter your choice: "))
+            print()
+            if choice == 1:
+                view_func(Assignments=Assignments)
+            elif choice == 2:
+                add_assignment()
+            elif choice == 3:
+                update_assignment(assignments=view_order_all())
+            elif choice == 4:
+                mark_completed(assignments=view_order_by_undone())
+            elif choice == 5:
+                undo_mark_as_done(assignments=view_order_by_done())
+            elif choice == 6:
+                show_study_summary(assignments=view_order_all())
+            elif choice == 7:
+                clear_terminal()
+            elif choice == 0:
                     print("Good Bye!")
-=======
                     break
-                elif choice == -1:
-                    LogOut()
-                    print("\nLogged out successfully.\n")
->>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
-                    break
-                else:
-                    print("\nInvalid choice. Please try again.\n")
-            except ValueError:
-                print("\nInvalid input. Please enter a number.\n")
+            else:
+                print("\nInvalid choice. Please try again.\n")
+        except ValueError:
+            print("\nInvalid input. Please enter a number.\n")
         

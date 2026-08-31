@@ -7,11 +7,7 @@ def update_assignment(assignments=None, Assignments = Assignments):
         print("\nNo assignments to update.\n")
         return
 
-<<<<<<< HEAD
     view_assignments(assignments=assignments)
-=======
-    view_assignments(assignments)
->>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
 
     user_input = input("\nEnter the assignment number to update: ")
     if not user_input.isdigit():

@@ -6,11 +6,7 @@ def mark_completed(Assignments=Assignments, assignments=None):
         print("\nNo assignments to update.\n")
         return
 
-<<<<<<< HEAD
     view_assignments(assignments=assignments)
-=======
-    view_assignments(assignments)
->>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
 
     user_input = input("\nEnter the assignment number to mark as completed: ")
     if not user_input.isdigit():
@@ -32,12 +28,7 @@ def undo_mark_as_done(Assignments=Assignments, assignments=None):
     if assignments is None or len(assignments) == 0:
         print("\nNo assignments to update.\n")
         return
-
-<<<<<<< HEAD
     view_assignments(assignments=assignments)
-=======
-    view_assignments(assignments)
->>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
 
     user_input = input("\nEnter the assignment number to undo mark as completed: ")
     if not user_input.isdigit():
