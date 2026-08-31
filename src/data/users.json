@@ -1,10 +1,16 @@
 {
-    "last_id": 1,
+
+    "last_id": 2,
     "users": [
         {
-            "id":1,
-            "username":"Hunganh",
-            "password":"demo"
+            "id": 1,
+            "username": "Hunganh",
+            "password": "demo"
+        },
+        {
+            "username": "HngAnh",
+            "password": "84867dd1059a590262fb4e910503ca84cbfc934f9319b86dd0c72d07d9ebdea7",
+            "id": 2
         }
     ]
 }

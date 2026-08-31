@@ -1,14 +1,35 @@
 {
-    "last_id": 1,
+    "last_id": 3,
     "assignments": [
         {
-            "name": "Bao cao AI",
-            "owner_id": 1,
-            "deadline": "11-09-2026",
+            "assignment_name": "1",
+            "module_name": "1",
+            "deadline": "2028-01-01",
+            "difficulty": 1,
+            "completed": false,
+            "score": 0.002044989775051125,
+            "level": "LOW",
+            "id": 1
+        },
+        {
+            "assignment_name": "1",
+            "module_name": "2",
+            "deadline": "2026-09-02",
             "difficulty": 4,
             "completed": false,
-            "score": 30,
-            "label": "High"
+            "score": 1.3333333333333333,
+            "level": "MEDIUM",
+            "id": 2
+        },
+        {
+            "assignment_name": "Hnh",
+            "module_name": "Hnh",
+            "deadline": "2026-09-11",
+            "difficulty": 3,
+            "completed": true,
+            "score": 0.25,
+            "level": "LOW",
+            "id": 3
         }
     ]
 }

@@ -27,8 +27,14 @@ class LangaDB:
                 print(f"Error: {e}")
                 return False
 
-    def query_all(self, name):
-        return self.data.get(name)
+    def all(self, name):
+        if isinstance(self.data, dict):
+            return self.data.get(name, [])
+        elif isinstance(self.data, list):
+            return self.data
+        else:
+            return []
+        #return self.data.get(name)
 
     def save(self, new_data):
         try:
@@ -50,10 +56,11 @@ class LangaDB:
         return current
 
     def find(self, list_key, field_name,value):
-        items = self.query(list_key, [])
+        items = self.data if isinstance(self.data, list) else self.query(list_key, [])
         if isinstance(items, list):
             for item in items:
                 if isinstance(item,dict) and item.get(field_name) == value:
+                    #print(f"Found item: {item}")
                     return item
         return None
 
@@ -74,16 +81,37 @@ class LangaDB:
             self.data.append(new_item)
         return self.save(self.data)
 
-    def sort_by(self, list_key="assignments", sort_key="score",reverse=True, limit=5):
+
+    def sort_by(self, list_key="assignments", sort_key="score",reverse=True, limit=None):
         items = self.data if isinstance(self.data, list) else self.query(list_key, self.data if isinstance(self.data, list) else [])
         if not isinstance(items, list):
             return []
         result = sorted(items,key=lambda item: item.get(sort_key, 0), reverse=reverse)
-        return result[:limit]
+        return result[:limit] if limit is not None else result
 
-    def update_where(self, list_key, field_name, value, updates):
+    def update(self, list_key, field_name, value, updates):
         item = self.find(list_key, field_name, value)
         if item:
             item.update(updates)
             return self.save(self.data)
         return False
+
+    def clear_all(self, list_key):
+
+        if isinstance(self.data, dict) and list_key in self.data:
+            self.data[list_key] = []
+            self.data['last_id'] = 0
+        elif isinstance(self.data, list):
+            self.data.clear()
+        else:
+            return False
+        #self.data['last_id'] = 0
+        return self.save(self.data)
+
+    def get_last_id(self, list_key):
+        if isinstance(self.data, dict) and list_key in self.data:
+            return self.data.get('last_id', 0)
+        elif isinstance(self.data, list):
+            return len(self.data)
+        else:
+            return 0
