@@ -57,11 +57,20 @@ def main(Assignments=Assignments):
             (5, "Undo Mark Assignment as Done"),
             (6, "Show Study Summary"),
             (7, "Clear Terminal"),
+<<<<<<< HEAD
             (0, "Exit"),
         ]
         while True:
             #username = session.get('username') if isinstance(session, dict) else session
             print(f"\nWelcome back!")
+=======
+            (0, "Exit w/o Logout"),
+            (-1, "Logout")
+        ]
+        while True:
+            username = session.get('username') if isinstance(session, dict) else session
+            print(f"\nWelcome back, {username}!")
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
             print_menu(menu)
             try:
                 choice = int(input("Enter your choice: "))
@@ -81,7 +90,14 @@ def main(Assignments=Assignments):
                 elif choice == 7:
                     clear_terminal()
                 elif choice == 0:
+<<<<<<< HEAD
                     print("Good Bye!")
+=======
+                    break
+                elif choice == -1:
+                    LogOut()
+                    print("\nLogged out successfully.\n")
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
                     break
                 else:
                     print("\nInvalid choice. Please try again.\n")

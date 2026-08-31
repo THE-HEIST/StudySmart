@@ -20,7 +20,10 @@ def print_menu(items):
 
 print(WELLCOME_TEXT)
 
+<<<<<<< HEAD
 """
+=======
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
 check_login = load_session()
 if check_login == None:
     print("No current user detected\n")
@@ -54,7 +57,11 @@ else:
     if mode == 1:
         main()
     else:
+<<<<<<< HEAD
         LogOut()
 """
 
 main()
+=======
+        LogOut()
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66

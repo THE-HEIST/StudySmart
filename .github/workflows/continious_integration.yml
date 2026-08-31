@@ -31,7 +31,11 @@ jobs:
         run: |
           pytest
 <<<<<<< HEAD
+<<<<<<< HEAD
         continue-on-error: true
 =======
         #continue-on-error: true
 >>>>>>> EasiestCode
+=======
+        #continue-on-error: true
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66

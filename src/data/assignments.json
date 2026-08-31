@@ -7,7 +7,12 @@
             "deadline": "2028-01-01",
             "difficulty": 1,
             "completed": false,
+<<<<<<< HEAD
             "score": 0.002044989775051125,
+=======
+            "user_id": 2,
+            "score": 0.0020408163265306124,
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
             "level": "LOW",
             "id": 1
         },
@@ -17,7 +22,12 @@
             "deadline": "2026-09-02",
             "difficulty": 4,
             "completed": false,
+<<<<<<< HEAD
             "score": 1.3333333333333333,
+=======
+            "user_id": null,
+            "score": 1.0,
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
             "level": "MEDIUM",
             "id": 2
         },
@@ -27,7 +37,12 @@
             "deadline": "2026-09-11",
             "difficulty": 3,
             "completed": true,
+<<<<<<< HEAD
             "score": 0.25,
+=======
+            "user_id": 2,
+            "score": 0.23076923076923078,
+>>>>>>> a524f49cccca3ba2298e5f8411e810d123d52f66
             "level": "LOW",
             "id": 3
         }
