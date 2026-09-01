@@ -1,6 +1,6 @@
 from src.data_processing_module.config import Assignments
 
-def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True, session=None):
+def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True):
     assignments = Assignments.all('assignments')
     a = []
     for i in assignments:
@@ -8,7 +8,7 @@ def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True
             a.append(i)
     return sorted(a, key=lambda x: x[sort_key], reverse=reverse)
 
-def view_order_by_done(Assignments=Assignments, sort_key="score", reverse=True, session=None):
+def view_order_by_done(Assignments=Assignments, sort_key="score", reverse=True):
     assignments = Assignments.all('assignments')
     a = []
     for i in assignments:
@@ -16,7 +16,7 @@ def view_order_by_done(Assignments=Assignments, sort_key="score", reverse=True, 
             a.append(i)
     return sorted(a, key=lambda x: x.get(sort_key,0),reverse=reverse)
 
-def view_order_all(Assignments=Assignments, sort_key="score", reverse=True, session=None):
+def view_order_all(Assignments=Assignments, sort_key="score", reverse=True):
     assignments = Assignments.all('assignments')
     return sorted(assignments, key=lambda x: x.get(sort_key,0), reverse=reverse)
 
@@ -44,7 +44,7 @@ def view_assignments(Assignments=Assignments, assignments=None):
             print("{:<5} {:<20} {:<15} {:<12} {:<15} {:<8} {:<10}".format(*row))
 
 def show_study_summary(assignments):
-    total_assignments = len(assignments)
+    total_assignments = len(assignments) if assignments is not None else 0
     completed_count = 0
     incomplete_count = 0
 

@@ -1,5 +1,5 @@
 from src.data_processing_module.config import Assignments
-
+from src.core.delete.assignment import delete_assignment
 from src.core.common.calculate_priority import re_calculate_priority
 from src.core.read.assignments import view_assignments, view_order_by_undone, view_order_by_done, view_order_all, show_study_summary
 from src.core.create.assignments import add_assignment
@@ -21,7 +21,7 @@ def print_menu(items):
         print("{:<5} {:<35}".format(no, name))
     print()
 
-def view_func(session=None, Assignments=Assignments):
+def view_func(Assignments=Assignments):
     menu = [
         (1, "View Undone Assignments"),
         (2, "View Done Assignments"),
@@ -34,10 +34,10 @@ def view_func(session=None, Assignments=Assignments):
         assignments = view_order_by_undone()
         view_assignments(assignments=assignments)
     elif sub_choice == 2:
-        assignments = view_order_by_done(session=session, Assignments=Assignments)
+        assignments = view_order_by_done(Assignments=Assignments)
         view_assignments(Assignments=Assignments, assignments=assignments)
     elif sub_choice == 3:
-        assignments = view_order_all(session=session, Assignments=Assignments)
+        assignments = view_order_all(Assignments=Assignments)
         view_assignments(Assignments=Assignments, assignments=assignments)
 
 def clear_terminal():
@@ -49,10 +49,11 @@ def main(Assignments=Assignments):
     menu = [
         (1, "View Assignments"),
         (2, "Add Assignment"),
-        (3, "Mark Assignment as Done"),
-        (4, "Undo Mark Assignment as Done"),
-        (5, "Show Study Summary"),
-        (6, "Clear Terminal"),
+        (3, "Delete Assignment"),
+        (4, "Mark Assignment as Done"),
+        (5, "Undo Mark Assignment as Done"),
+        (6, "Show Study Summary"),
+        (7, "Clear Terminal"),
             (0, "Exit"),
         ]
     while True:
@@ -67,12 +68,14 @@ def main(Assignments=Assignments):
             elif choice == 2:
                 add_assignment()
             elif choice == 3:
-                mark_completed(assignments=view_order_by_undone())
+                delete_assignment(assignments=view_order_all())
             elif choice == 4:
-                undo_mark_as_done(assignments=view_order_by_done())
+                mark_completed(assignments=view_order_by_undone())
             elif choice == 5:
-                show_study_summary(assignments=view_order_all())
+                undo_mark_as_done(assignments=view_order_by_done())
             elif choice == 6:
+                show_study_summary(assignments=view_order_all())
+            elif choice == 7:
                 clear_terminal()
             elif choice == 0:
                     print("Good Bye!")

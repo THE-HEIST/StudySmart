@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 # ==========================================
 # FUNCTION 1: ADD ASSIGNMENT
 # ==========================================
-def add_assignment(Assignments=Assignments, Users=Users, test=None):
+def add_assignment(Assignments=Assignments):
     # Prompt user to input information and loop to ensure them are not empty
     assignment_name = input("Assignment name:")
     while assignment_name == "":
@@ -31,7 +31,7 @@ def add_assignment(Assignments=Assignments, Users=Users, test=None):
             break
         except ValueError:
             print("Invalid input! Please enter a valid integer for difficulty level.")
-            return 400
+            return False
 
        # Validate that days remaining is within the valid range ( >0 )
     """
@@ -48,7 +48,7 @@ def add_assignment(Assignments=Assignments, Users=Users, test=None):
             break
         except ValueError:
             deadline = input("Invalid date format! Please enter the deadline in the format yyyy-mm-dd:")
-            return 400
+            return False
 
     # Validate that difficulty level is within the valid range (1 to 5)
     while True:
@@ -77,4 +77,4 @@ def add_assignment(Assignments=Assignments, Users=Users, test=None):
     # Append the newly created assignment record to the main list
     Assignments.add("assignments", assignment)
 
-    return 200
+    return True

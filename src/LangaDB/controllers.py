@@ -115,3 +115,12 @@ class LangaDB:
             return len(self.data)
         else:
             return 0
+
+    def delete(self, list_key, field_name, value):
+        items = self.data if isinstance(self.data, list) else self.query(list_key, [])
+        if isinstance(items, list):
+            for i, item in enumerate(items):
+                if isinstance(item, dict) and item.get(field_name) == value:
+                    del items[i]
+                    return self.save(self.data)
+        return False
