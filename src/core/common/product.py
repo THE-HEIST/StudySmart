@@ -31,8 +31,8 @@ def view_func(session=None, Assignments=Assignments):
     sub_choice = int(input("Enter your choice: "))
     print()
     if sub_choice == 1:
-        assignments = view_order_by_undone(session=session, Assignments=Assignments)
-        view_assignments(Assignments=Assignments, assignments=assignments)
+        assignments = view_order_by_undone()
+        view_assignments(assignments=assignments)
     elif sub_choice == 2:
         assignments = view_order_by_done(session=session, Assignments=Assignments)
         view_assignments(Assignments=Assignments, assignments=assignments)
@@ -46,7 +46,6 @@ def clear_terminal():
 
 def main(Assignments=Assignments):
     check_priority_new_day(Assignments=Assignments)
-    #session = load_session()
     menu = [
         (1, "View Assignments"),
         (2, "Add Assignment"),
