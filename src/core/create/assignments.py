@@ -17,17 +17,23 @@ def add_assignment(Assignments=Assignments):
            print("Module cannot be empty!")
            module_name = input("Module:")
 
-    deadline = input("Deadline (Ex: yyyy-mm-dd):")
-    while deadline == "":
-           print("Deadline cannot be empty!")
-           deadline = input("Deadline (Ex: yyyy-mm-dd): ")
-
+    while True:
+        try:
+            deadline = input("Deadline (Ex: yyyy-mm-dd):")
+            dl = datetime.strptime(deadline, "%Y-%m-%d").date()
+            break
+        except ValueError:
+            print("Invalid date format! Please enter the deadline in the format yyyy-mm-dd.")
+            return False
+    
     while True:
         try:
             difficulty = int(input("Difficulty level (1 to 5):"))
-            while difficulty =="":
-                print("Difficulty level cannot be empty!")
-                difficulty = int(input("Difficulty level (1 to 5):"))
+            while difficulty < 1 or difficulty > 5:
+                print("---------------------")
+                print("Please enter level from 1 to 5 !")
+                print("---------------------")
+                difficulty = int(input("Difficulty level:"))
             break
         except ValueError:
             print("Invalid input! Please enter a valid integer for difficulty level.")
@@ -40,7 +46,7 @@ def add_assignment(Assignments=Assignments):
                print("Please enter a positive number !")
                print("---------------------")
                days_remaining = int(input("Days remaining:"))
-    """
+    
     while True:
         try:
             days_remaining = datetime.strptime(deadline, "%Y-%m-%d").date() - datetime.now().date()
@@ -49,15 +55,7 @@ def add_assignment(Assignments=Assignments):
         except ValueError:
             deadline = input("Invalid date format! Please enter the deadline in the format yyyy-mm-dd:")
             return False
-
-    # Validate that difficulty level is within the valid range (1 to 5)
-    while True:
-        while difficulty < 1 or difficulty > 5:
-            print("---------------------")
-            print("Please enter level from 1 to 5 !")
-            print("---------------------")
-            difficulty = int(input("Difficulty level:"))
-        break
+    """
 
     deadline = datetime.strptime(deadline, "%Y-%m-%d").date()
     #today = datetime.now().date()

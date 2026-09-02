@@ -6,7 +6,7 @@ def view_order_by_undone(Assignments=Assignments, sort_key="score", reverse=True
     for i in assignments:
         if i.get("completed") == False:
             a.append(i)
-    return sorted(a, key=lambda x: x[sort_key], reverse=reverse)
+    return sorted(a, key=lambda x: x.get(sort_key, 0), reverse=reverse)
 
 def view_order_by_done(Assignments=Assignments, sort_key="score", reverse=True):
     assignments = Assignments.all('assignments')
@@ -25,7 +25,7 @@ def view_order_all(Assignments=Assignments, sort_key="score", reverse=True):
 # FUNCTION 2: VIEW ASSIGNMENT
 # ==========================================
 def view_assignments(Assignments=Assignments, assignments=None):    
-    if len(assignments) == 0 or assignments == None:
+    if assignments is None or len(assignments) == 0:
         print("No assignments found")
     else:
         header = ["ID", "Assignment Name", "Module", "Deadline", "Difficulty", "Score", "Completed"]
@@ -39,7 +39,7 @@ def view_assignments(Assignments=Assignments, assignments=None):
                 assignment.get("deadline", ""),
                 assignment.get("difficulty", ""),
                 round(assignment.get("score", 0), 2),
-                "Done" if assignment.get("completed", True) else "Not Done"
+                "Done" if assignment.get("completed", False) else "Not Done"
             ]
             print("{:<5} {:<20} {:<15} {:<12} {:<15} {:<8} {:<10}".format(*row))
 
