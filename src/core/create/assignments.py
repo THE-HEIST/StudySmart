@@ -38,28 +38,10 @@ def add_assignment(Assignments=Assignments):
             print("Invalid input! Please enter a valid integer for difficulty level.")
 
        # Validate that days remaining is within the valid range ( >0 )
-    """
-    while days_remaining < 0 :
-               print("---------------------")
-               print("Please enter a positive number !")
-               print("---------------------")
-               days_remaining = int(input("Days remaining:"))
-    
-    while True:
-        try:
-            days_remaining = datetime.strptime(deadline, "%Y-%m-%d").date() - datetime.now().date()
-            days_remaining = days_remaining.days
-            break
-        except ValueError:
-            deadline = input("Invalid date format! Please enter the deadline in the format yyyy-mm-dd:")
-            return False
-    """
 
     deadline = datetime.strptime(deadline, "%Y-%m-%d").date()
-    #today = datetime.now().date()
 
     # Generate unique assignment number based on current list length
-    #assignment_number = len(assignments) + 1
     # Create dictionary containing all assignment details
     assignment = {
         "assignment_name": assignment_name,

@@ -16,9 +16,8 @@ def test_delete_assignment(monkeypatch):
     Assignments.save({"last_id": 1, "assignments": [mock_assignment]})
     
     # Call the delete_assignment function
-    inputs = ["1"]  # Simulate user input for assignment number to delete
-    with monkeypatch.context() as m:
-        m.setattr('builtins.input', lambda _: inputs.pop(0))
+    inputs = iter(["1"])  # Simulate user input for assignment number to delete
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     delete_assignment(Assignments=Assignments, assignments=Assignments.all("assignments"))
 
     
