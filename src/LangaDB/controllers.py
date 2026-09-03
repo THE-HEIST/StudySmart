@@ -93,6 +93,13 @@ class LangaDB:
         else:
             return 0
 
+    def clear_all(self, list_key):
+        if isinstance(self.data, dict):
+            self.data[list_key] = []
+        elif isinstance(self.data, list):
+            self.data.clear()
+        return self.save(self.data)
+
     def delete(self, list_key, field_name, value):
         items = self.data if isinstance(self.data, list) else self.query(list_key, [])
         if isinstance(items, list):
