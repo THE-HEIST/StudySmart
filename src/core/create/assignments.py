@@ -24,7 +24,6 @@ def add_assignment(Assignments=Assignments):
             break
         except ValueError:
             print("Invalid date format! Please enter the deadline in the format yyyy-mm-dd.")
-            return False
     
     while True:
         try:
@@ -37,7 +36,6 @@ def add_assignment(Assignments=Assignments):
             break
         except ValueError:
             print("Invalid input! Please enter a valid integer for difficulty level.")
-            return False
 
        # Validate that days remaining is within the valid range ( >0 )
     """

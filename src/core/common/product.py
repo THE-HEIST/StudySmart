@@ -25,21 +25,28 @@ def view_func(Assignments=Assignments):
     menu = [
         (1, "View Undone Assignments"),
         (2, "View Done Assignments"),
-        (3, "View All Assignments")
+        (3, "View All Assignments"),
+        (0, "Back to Main Menu"),
     ]
     print_menu(menu)
-    sub_choice = int(input("Enter your choice: "))
-    print()
-    if sub_choice == 1:
-        assignments = view_order_by_undone()
-        view_assignments(assignments=assignments)
-    elif sub_choice == 2:
-        assignments = view_order_by_done(Assignments=Assignments)
-        view_assignments(Assignments=Assignments, assignments=assignments)
-    elif sub_choice == 3:
-        assignments = view_order_all(Assignments=Assignments)
-        view_assignments(Assignments=Assignments, assignments=assignments)
-
+    while True:
+        try:
+            sub_choice = int(input("Enter your choice: "))
+            print()
+            if sub_choice == 1:
+                assignments = view_order_by_undone()
+                view_assignments(assignments=assignments)
+            elif sub_choice == 2:
+                assignments = view_order_by_done(Assignments=Assignments)
+                view_assignments(Assignments=Assignments, assignments=assignments)
+            elif sub_choice == 3:
+                assignments = view_order_all(Assignments=Assignments)
+                view_assignments(Assignments=Assignments, assignments=assignments)
+            elif sub_choice == 0:
+                break
+        except ValueError:
+            print("\nInvalid input. Please enter a number.\n")
+            
 def clear_terminal():
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
