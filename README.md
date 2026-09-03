@@ -15,19 +15,71 @@ StudySmart helps you organize your schoolwork by letting you:
 
 The priority system automatically scores each assignment based on how hard it is and how many days are left. The closer the deadline and the harder the task, the higher it ranks.
 
-## Quick start
+## Download & Set Up
+
+### Option 1: Download from GitHub (Full Version with Tests, CI, ...)
+
+Follow these steps to download and run the complete StudySmart project:
+
+**Step 1: Clone the Repository**
+
+Download the project from GitHub:
 
 ```bash
-# Clone the repository
 git clone https://github.com/THE-HEIST/StudySmart.git
 cd StudySmart
+```
 
-# Install dependencies
+**Step 2: Install Python Dependencies**
+
+Install the required libraries:
+
+```bash
 pip install -r requirements.txt
+```
 
-# Run the application
+**Step 3: Run the Application**
+
+Start the program using:
+
+```bash
 python main.py
 ```
+
+**Step 4: Use the Application**
+
+After starting the program, the StudySmart main menu will be displayed. Select an option by entering its corresponding number and pressing Enter.
+
+### Option 2: Run from the ZIP File (Just Using Version)
+
+If you are using the StudySmart ZIP file, GitHub is not required.
+
+**Step 1: Extract the ZIP File**
+
+Download the provided ZIP file and extract it to a folder on your computer.
+
+**Step 2: Open the Project Folder**
+
+Open a terminal in the extracted StudySmart folder.
+```
+
+## Run StudySmart
+
+### Option 1: Native Python File
+
+Start StudySmart with:
+
+```bash
+python main.py
+```
+
+### Option 2: Jupyter Notebook File
+
+Start StudySmart by opening the `main.ipynb` in Anaconda Navigator or other Notebook editor and run the main cell.
+
+The application will then display the main menu and is ready to use.
+
+> **Note:** The ZIP file contains the complete project files required to run StudySmart. The GitHub repository provides the same project with its version history and development structure. For a quick demonstration, the ZIP version can be used directly without cloning the repository.
 
 ## How it works
 
@@ -105,12 +157,6 @@ pytest --cov=src
 ```
 
 Tests use a separate database in `src/data/test/` so they never touch your real data.
-
-## Documentation
-
-**[StudySmart Documentation →](https://the-heist.github.io/THE-HEIST/)**
-
-The documentation website covers every file in the project with line-by-line explanations, designed for people who are new to programming.
 
 ## Tech stack
 

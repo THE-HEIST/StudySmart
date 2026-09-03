@@ -44,17 +44,6 @@ class LangaDB:
         except Exception as e:
             print(f"Error: {e}")
 
-    def query(self, path, default=None):
-        keys = path.split('.')
-        current = self.data
-
-        for key in keys:
-            if isinstance(current, dict) and key in current:
-                current = current[key]
-            else:
-                return default
-        return current
-
     def find(self, list_key, field_name,value):
         items = self.data if isinstance(self.data, list) else self.query(list_key, [])
         if isinstance(items, list):
@@ -95,18 +84,6 @@ class LangaDB:
             item.update(updates)
             return self.save(self.data)
         return False
-
-    def clear_all(self, list_key):
-
-        if isinstance(self.data, dict) and list_key in self.data:
-            self.data[list_key] = []
-            self.data['last_id'] = 0
-        elif isinstance(self.data, list):
-            self.data.clear()
-        else:
-            return False
-        #self.data['last_id'] = 0
-        return self.save(self.data)
 
     def get_last_id(self, list_key):
         if isinstance(self.data, dict) and list_key in self.data:
