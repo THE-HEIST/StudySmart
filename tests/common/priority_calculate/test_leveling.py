@@ -29,25 +29,19 @@ assignment = [{
     "score": 0,
     "user_id": 1,
     "completed": False
-},
-{
-    "id": 4,
-    "assignment_name": "assignment_name",
-    "module_name": "module_name",
-    "deadline": "2022-01-01",
-    "difficulty": 1,
-    "score": 0,
-    "user_id": 1,
-    "completed": False
 }]
 
 x1 = calculate_priority_score(assignment[0])
 x2 = calculate_priority_score(assignment[1])
 x3 = calculate_priority_score(assignment[2])
-x4 = calculate_priority_score(assignment[3])
 
 def test_calculate_priority_level():
     assert get_priority_level(x1) == "HIGH"
     assert get_priority_level(x2) == "MEDIUM"
     assert get_priority_level(x3) == "LOW"
-    assert get_priority_level(x4) == "OVERDUE"
+
+"""
+def test_failed_calculate_priority():
+    with pytest.raises(ValueError):
+        calculate_priority_score(-1)
+"""

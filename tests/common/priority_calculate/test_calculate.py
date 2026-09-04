@@ -25,3 +25,9 @@ assignment = [{
 def test_calculate_priority():
     assert calculate_priority_score(assignment[1]) == pytest.approx(2/3)
     assert calculate_priority_score(assignment[0]) == pytest.approx(4/3)
+
+"""
+def test_calculate_priority_negative():
+    with pytest.raises(ValueError):
+        calculate_priority_score(-1)
+"""

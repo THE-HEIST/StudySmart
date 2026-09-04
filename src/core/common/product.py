@@ -8,6 +8,7 @@ from src.core.update.mark_as_done import mark_completed, undo_mark_as_done
 
 def check_priority_new_day(Assignments=Assignments):
     ass = re_calculate_priority(Assignments.all("assignments"))
+    #Assignments.clear_all("assignments")
     assignments = {"last_id": Assignments.get_last_id("assignments"), "assignments": ass}
     Assignments.save(assignments)
 
@@ -45,7 +46,7 @@ def view_func(Assignments=Assignments):
                 break
         except ValueError:
             print("\nInvalid input. Please enter a number.\n")
-
+            
 def clear_terminal():
     import os
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -63,6 +64,7 @@ def main(Assignments=Assignments):
             (0, "Exit"),
         ]
     while True:
+        #username = session.get('username') if isinstance(session, dict) else session
         print(f"\nWelcome back!")
         print_menu(menu)
         try:
