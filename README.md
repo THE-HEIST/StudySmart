@@ -15,61 +15,17 @@ StudySmart helps you organize your schoolwork by letting you:
 
 The priority system automatically scores each assignment based on how hard it is and how many days are left. The closer the deadline and the harder the task, the higher it ranks.
 
-## Download & Set Up
-
-### Option 1: Download from GitHub (Full Version with Tests, CI, ...)
-
-Follow these steps to download and run the complete StudySmart project:
-
-**Step 1: Clone the Repository**
-
-Download the project from GitHub:
+## Quick start
 
 ```bash
+# Clone the repository
 git clone https://github.com/THE-HEIST/StudySmart.git
 cd StudySmart
-```
 
-**Step 2: Install Python Dependencies**
-
-Install the required libraries:
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-**Step 3: Run the Application**
-
-Start the program using:
-
-```bash
-python main.py
-```
-
-**Step 4: Use the Application**
-
-After starting the program, the StudySmart main menu will be displayed. Select an option by entering its corresponding number and pressing Enter.
-
-### Option 2: Run from the ZIP File (Just Using Version)
-
-If you are using the StudySmart ZIP file, GitHub is not required.
-
-**Step 1: Extract the ZIP File**
-
-Download the provided ZIP file and extract it to a folder on your computer.
-
-**Step 2: Open the Project Folder**
-
-Open a terminal in the extracted StudySmart folder.
-```
-
-## Run StudySmart
-
-### Option 1: Native Python File
-
-Start StudySmart with:
-
-```bash
+# Run the application
 python main.py
 ```
 
@@ -79,7 +35,7 @@ Start StudySmart by opening the `main.ipynb` in Anaconda Navigator or other Note
 
 The application will then display the main menu and is ready to use.
 
-> **Note:** The ZIP file contains the complete project files required to run StudySmart. The GitHub repository provides the same project with its version history, unit test cases, continious intergration and development structure. For a quick demonstration, the ZIP version can be used directly without cloning the repository. If you just use the zip version for normal usage you not have to worry about requirements, pyproject or anything else
+> **Note:** The ZIP file contains the complete project files required to run StudySmart. The GitHub repository provides the same project with its version history and development structure. For a quick demonstration, the ZIP version can be used directly without cloning the repository.
 
 ## How it works
 
@@ -157,6 +113,12 @@ pytest --cov=src
 ```
 
 Tests use a separate database in `src/data/test/` so they never touch your real data.
+
+## Documentation
+
+**[StudySmart Documentation →](https://the-heist.github.io/THE-HEIST/)**
+
+The documentation website covers every file in the project with line-by-line explanations, designed for people who are new to programming.
 
 ## Tech stack
 
