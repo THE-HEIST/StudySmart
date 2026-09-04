@@ -79,7 +79,7 @@ Start StudySmart by opening the `main.ipynb` in Anaconda Navigator or other Note
 
 The application will then display the main menu and is ready to use.
 
-> **Note:** The ZIP file contains the complete project files required to run StudySmart. The GitHub repository provides the same project with its version history and development structure. For a quick demonstration, the ZIP version can be used directly without cloning the repository.
+> **Note:** The ZIP file contains the complete project files required to run StudySmart. The GitHub repository provides the same project with its version history, unit test cases, continious intergration and development structure. For a quick demonstration, the ZIP version can be used directly without cloning the repository. If you just use the zip version for normal usage you not have to worry about requirements, pyproject or anything else
 
 ## How it works
 
